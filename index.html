@@ -8,27 +8,29 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #001f3f;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: white;
       margin: 0;
       padding: 0;
     }
-    .judul-kanan {
-      text-align: right;
-      padding: 15px 20px;
+    .judul {
+      position: absolute;
+      top: 20px;
+      right: 30px;
       font-size: 1.4rem;
       font-weight: bold;
       color: #00ffc3;
+      text-shadow: 1px 1px 4px #000;
     }
     .section {
       max-width: 500px;
-      margin: 30px auto;
-      background: #1a1a1a;
+      margin: 100px auto 30px auto;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 0 10px #ff0077;
       text-align: center;
-      margin-bottom: 30px;
     }
     .section img {
       max-width: 100%;
@@ -41,13 +43,14 @@
       font-weight: bold;
       margin-bottom: 10px;
     }
-    .info {
-      font-size: 0.95rem;
-      color: #bbb;
-      margin-top: 10px;
+    .price {
+      color: #00ffc3;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
     }
-    .info b {
-      color: white;
+    .desc {
+      font-size: 0.95rem;
+      color: #ccc;
     }
     .btn {
       display: inline-block;
@@ -63,64 +66,61 @@
     .btn:hover {
       background-color: #128C7E;
     }
+    .header {
+      text-align: center;
+      font-size: 1.6rem;
+      color: #ff0077;
+      margin-top: 20px;
+    }
+    .info {
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-top: 10px;
+    }
+    .info b {
+      color: white;
+    }
   </style>
 </head>
 <body>
 
-  <div class="judul-kanan">Pinzy Offc</div>
+  <div class="judul">Pinzy Offc</div>
 
   <div class="section">
-    <div class="title">Scan untuk Bayar</div>
+    <div class="header">Scan untuk Bayar</div>
     <img src="qris.jpg" alt="QRIS Code">
     <div class="info">
       <p>Nama Toko: <b>TOKOAERO OK2471435</b></p>
       <p>Metode: QRIS</p>
-      <p>ID Transaksi: ID2025408275456</p>
+      <p>ID: ID2025408275456</p>
       <p>Dicetak: 2025-05-30</p>
     </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">
-      ✅ Saya Sudah Bayar
-    </a>
+    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
 
   <div class="section">
-    <div class="title">Atau Bayar via DANA</div>
+    <div class="header">Atau Bayar via DANA</div>
     <div class="info">
-      <p><b>Nomor DANA: 62895373244456</b></p>
+      <p><b>Nomor DANA: 0895373244456</b></p>
       <p>Nama Penerima: <b>CoupDePynzz</b></p>
     </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%2062895373244456.%20Mohon%20dicek.">
-      ✅ Saya Sudah Bayar
-    </a>
+    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%206287889308331.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
 
   <div class="section">
     <img src="https://files.catbox.moe/pzumnd.jpg" alt="SC CORVUS">
     <div class="title">SC CORVUS</div>
-    <div class="info">
-      Harga: <b>10K</b>
-    </div>
-    <div class="info">
-      Ini adalah script bug hitam, jangan digunakan ke orang tidak bersalah!<br>
-      Enc: 5K | No enc: 10K | Ress: 15K
-    </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">
-      Pesan via WhatsApp
-    </a>
+    <div class="price">Harga: 10K</div>
+    <div class="desc">Ini adalah script bug hitam, jangan digunakan ke orang tidak bersalah!<br>Enc: 5K | No enc: 10K | Ress 15K</div>
+    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
   </div>
 
   <div class="section">
     <img src="https://files.catbox.moe/fmtv4c.jpg" alt="SC SYREN">
     <div class="title">SC SYREN</div>
-    <div class="info">
-      Harga: <b>10K</b>
-    </div>
-    <div class="info">
-      Script bug ganas, efek fatal ke target. Gunakan dengan bijak.
-    </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">
-      Pesan via WhatsApp
-    </a>
+    <div class="price">Harga: 10K</div>
+    <div class="desc">Script bug ganas, efek fatal ke target. Gunakan dengan bijak.</div>
+    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
   </div>
 
 </body>
