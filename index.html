@@ -2,231 +2,203 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pinzy Store - Pembayaran</title>
+  <meta charset="UTF-8">
+  <title>Pinzy Payment</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
       margin: 0;
       padding: 0;
-    }
-    .judul {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #00ffc3;
-      text-shadow: 1px 1px 6px #000;
-    }
-    .section {
-      max-width: 500px;
-      margin: 100px auto 30px auto;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 10px #fff;
       text-align: center;
     }
-    .section img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .title {
-      color: #ff0077;
-      font-size: 1.4rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .price {
-      color: #00ffc3;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-    .desc {
-      font-size: 0.95rem;
-      color: #ccc;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      background-color: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background-color: #128C7E;
-    }
-    .header {
-      text-align: center;
-      font-size: 1.6rem;
-      color: #ff0077;
-      margin-top: 20px;
-    }
-    .info {
-      font-size: 0.95rem;
-      color: #bbb;
-      margin-top: 10px;
-    }
-    .info b {
-      color: white;
-    }
+
     #popup {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       z-index: 9999;
     }
-    #popup .content {
-      background: rgba(0, 0, 0, 0.95);
+
+    .popup-content {
+      background-color: #111;
       padding: 30px;
-      border-radius: 14px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 0 15px #ff0077;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffc3;
       max-width: 90%;
+      width: 360px;
     }
-    #popup h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+
+    .popup-content h2 {
       color: #00ffc3;
+      margin-bottom: 15px;
     }
-    #popup p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      color: #ccc;
+
+    .popup-content p {
+      margin: 10px 0;
+      font-size: 16px;
     }
-    #popup button {
-      padding: 10px 25px;
-      background: #25D366;
-      color: white;
+
+    .popup-content button {
+      background-color: #00ffc3;
+      color: #000;
+      padding: 10px 20px;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-    #popup button:hover {
-      background: #128C7E;
+      margin-top: 15px;
+      font-weight: bold;
     }
 
-    audio {
-      display: none;
+    /* Spinner */
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #00ffc3;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
     }
 
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Kedipan teks */
+    #loading-text {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #00ffc3;
+      font-weight: bold;
+      animation: fadeText 1.2s infinite alternate;
+    }
+
+    @keyframes fadeText {
+      from { opacity: 1; }
+      to { opacity: 0.5; }
+    }
+
+    /* Progress bar */
+    #progress-bar {
+      width: 80%;
+      height: 10px;
+      background: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 15px auto;
+    }
+
+    #progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #00ffc3, #007bff);
+      animation: loadProgress 5s linear forwards;
+    }
+
+    @keyframes loadProgress {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* Typing animation */
+    #typing-text {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ccc;
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #ccc;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards, blink .7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 240px; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Loading container */
     #loading {
       position: fixed;
-      width: 100%;
-      height: 100%;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000000ee;
       z-index: 10000;
-    }
-    .spinner {
-      border: 5px solid #444;
-      border-top: 5px solid #00ffc3;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
   </style>
 </head>
 <body>
-
-  <!-- Loading screen -->
-  <div id="loading">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Judul -->
-  <div class="judul">𝕻𝖎𝖓𝖟𝖞 𝕺𝖋𝖋𝖈</div>
-
-  <!-- Musik autoplay -->
-  <audio id="bgmusic" autoplay loop>
-    <source src="all.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Popup intro -->
+  <!-- POPUP -->
   <div id="popup">
-    <div class="content">
-      <h1>𝚂𝚎𝚕𝚊𝚖𝚊𝚝 𝙳𝚊𝚝𝚊𝚗𝚐 𝙳𝚒 𝚆𝚎𝚋𝚜𝚒𝚝𝚎 𝙿𝚒𝚗𝚣𝚢 𝙼𝚊𝚛𝚔𝚎𝚝</h1>
-      <p>𝚃𝚎𝚛𝚒𝚖𝚊𝚔𝚊𝚜𝚒𝚑 𝚃𝚎𝚕𝚊𝚑 𝙼𝚎𝚗𝚐𝚞𝚗𝚓𝚞𝚗𝚐𝚒 𝚆𝚎𝚋𝚜𝚒𝚝𝚎 𝚃𝚒𝚖 𝙿𝚒𝚗𝚣𝚢𝙾𝚏𝚏𝚌, 𝚃𝚎𝚖𝚙𝚊𝚝 𝚃𝚎𝚛𝚋𝚊𝚒𝚔 𝚂𝚌𝚛𝚒𝚙𝚝 𝙱𝚎𝚛𝚔𝚞𝚊𝚕𝚒𝚊𝚜. <br>𝚂𝚒𝚕𝚊𝚑𝚔𝚊𝚗 𝙿𝚒𝚕𝚒𝚑 𝚖𝚎𝚝𝚘𝚍𝚎 𝙿𝚎𝚖𝚋𝚊𝚢𝚊𝚛𝚊𝚗 𝙰𝚝𝚊𝚞 𝙿𝚛𝚘𝚍𝚞𝚔 𝚈𝚊𝚗𝚐 𝚃𝚎𝚛𝚜𝚎𝚍𝚒𝚊 𝙳𝚒 𝙱𝚊𝚠𝚊𝚑 𝙸𝚗𝚒.</p>
-      <button onclick="closePopup()">𝗠𝗮𝘀𝘂𝗸</button>
+    <div class="popup-content">
+      <h2>PINZY PAYMENT</h2>
+      <p>Website ini hanya untuk melakukan transaksi otomatis!</p>
+      <p>Jangan dipakai sembarangan karena IP akan tercatat otomatis.</p>
+      <p>Jika kamu paham dan siap, klik tombol di bawah.</p>
+      <button onclick="closePopup()">Saya Paham</button>
     </div>
   </div>
 
-  <!-- Pembayaran QRIS -->
-  <div class="section">
-    <div class="header">𝙎𝘾𝘼𝙉 𝙐𝙉𝙏𝙐𝙆 𝙈𝙀𝙈𝘽𝘼𝙔𝘼𝙍</div>
-    <img src="qris.jpg" alt="QRIS Code">
-    <div class="info">
-      <p>𝙉𝘼𝙈𝘼 𝙌𝙍: <b>𝙏𝙊𝙆𝙊𝘼𝙀𝙍𝙊 𝙊𝙆2471435</b></p>
-      <p>𝙈𝙀𝙏𝙊𝘿𝙀: QRIS</p>
-      <p>𝙄𝘿: ID2025408275456</p>
-      <p>𝘿𝙄𝘾𝙀𝙏𝘼𝙆: 2025-05-30</p>
+  <!-- LOADING ANIMATION -->
+  <div id="loading">
+    <div style="text-align: center;">
+      <div class="spinner"></div>
+      <div id="loading-text">Memuat konten...</div>
+      <div id="progress-bar"><div id="progress-fill"></div></div>
+      <div id="typing-text">Menghubungkan ke server...</div>
     </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ 𝗦𝗮𝘆𝗮 𝗦𝘂𝗱𝗮𝗵 𝗠𝗲𝗺𝗯𝗮𝘆𝗮𝘁</a>
   </div>
 
-  <!-- Pembayaran DANA -->
-  <div class="section">
-    <div class="header">𝘼𝙏𝘼𝙐 𝘽𝘼𝙔𝘼𝙍 𝙑𝙄𝘼 𝘿𝘼𝙉𝘼</div>
-    <div class="info">
-      <p><b>𝙉𝙊𝙈𝙊𝙍 𝘿𝘼𝙉𝘼: 0895373244456</b></p>
-      <p>𝙉𝘼𝙈𝘼 𝘿𝘼𝙉𝘼: <b>CoupDePynzz</b></p>
-    </div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%200895373244456.%20Mohon%20dicek.">✅ 𝗦𝗮𝘆𝗮 𝗦𝘂𝗱𝗮𝗵 𝗠𝗲𝗺𝗯𝗮𝘆𝗮𝗿</a>
-  </div>
+  <!-- OPTIONAL BACKGROUND MUSIC -->
+  <audio id="loadSound" src="https://assets.mixkit.co/sfx/preview/mixkit-loading-wireless-signal-1321.mp3" preload="auto"></audio>
 
-  <!-- Produk 1 -->
-  <div class="section">
-    <img src="https://files.catbox.moe/pzumnd.jpg" alt="SC CORVUS">
-    <div class="title">𝙎𝘾 𝘾𝙊𝙍𝙑𝙐𝙎</div>
-    <div class="price">𝙃𝘼𝙍𝙂𝘼: 10K</div>
-    <div class="desc">Script bug hitam, jangan digunakan ke orang tidak bersalah!<br>Enc: 5K | No enc: 10K | Ress 15K</div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
-  </div>
-
-  <!-- Produk 2 -->
-  <div class="section">
-    <img src="https://files.catbox.moe/fmtv4c.jpg" alt="SC SYREN">
-    <div class="title">𝙎𝘾 𝙎𝙔𝙍𝙀𝙉</div>
-    <div class="price">𝙃𝘼𝙍𝙂𝘼: 10K</div>
-    <div class="desc">Script bug ganas, efek fatal ke target. Gunakan dengan bijak.</div>
-    <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
-  </div>
-
-  <!-- Script JS -->
+  <!-- SCRIPT -->
   <script>
+    // Sembunyikan loading ketika semua konten selesai dimuat
     window.addEventListener('load', () => {
       document.getElementById('loading').style.display = 'none';
     });
 
     function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-      const music = document.getElementById('bgmusic');
-      if (music) music.play().catch(()=>{});
+      const loading = document.getElementById('loading');
+      const sound = document.getElementById('loadSound');
+      
+      loading.style.display = 'flex';
+
+      // Mainkan suara loading (opsional)
+      if (sound) sound.play().catch(() => {});
+
+      // Setelah 5 detik, sembunyikan popup dan loading
+      setTimeout(() => {
+        document.getElementById('popup').style.display = 'none';
+        loading.style.display = 'none';
+
+        // Jika ada musik latar
+        const music = document.getElementById('bgmusic');
+        if (music) music.play().catch(() => {});
+      }, 5000);
     }
   </script>
-
 </body>
 </html>
