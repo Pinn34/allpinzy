@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pinzy Store - Pembayaran</title>
+  <title>Corvus Store - Pembayaran</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -80,8 +80,6 @@
     .info b {
       color: white;
     }
-
-    /* Popup Styles */
     #popup {
       position: fixed;
       top: 0; left: 0;
@@ -129,7 +127,6 @@
       display: none;
     }
 
-    /* Loading Screen */
     #loading {
       position: fixed;
       width: 100%;
@@ -160,25 +157,24 @@
     <div class="spinner"></div>
   </div>
 
-  <!-- Judul kanan atas -->
+  <!-- Judul -->
   <div class="judul">𝐏𝐢𝐧𝐳𝐲 𝐎𝐟𝐟𝐜</div>
 
-  <!-- Musik -->
+  <!-- Musik autoplay -->
   <audio id="bgmusic" autoplay loop>
     <source src="all.mp3" type="audio/mpeg">
-    Browser tidak mendukung audio.
   </audio>
 
-  <!-- Popup ucapan selamat datang -->
+  <!-- Popup intro -->
   <div id="popup">
     <div class="content">
-      <h1>Selamat Datang di Market Pinzy Offc</h1>
-      <p>Terima kasih telah mengunjungi Market Pinzy Offc, tempat terbaik untuk script berkualitas. <br>Silakan pilih metode pembayaran atau produk yang tersedia di bawah ini.</p>
+      <h1>Selamat Datang di Corvus Store</h1>
+      <p>Terima kasih telah mengunjungi Corvus Store, tempat terbaik untuk script berkualitas. <br>Silakan pilih metode pembayaran atau produk yang tersedia di bawah ini.</p>
       <button onclick="closePopup()">Masuk</button>
     </div>
   </div>
 
-  <!-- Konten utama -->
+  <!-- Pembayaran QRIS -->
   <div class="section">
     <div class="header">Scan untuk Bayar</div>
     <img src="qris.jpg" alt="QRIS Code">
@@ -191,6 +187,7 @@
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
 
+  <!-- Pembayaran DANA -->
   <div class="section">
     <div class="header">Atau Bayar via DANA</div>
     <div class="info">
@@ -200,6 +197,7 @@
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%200895373244456.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
 
+  <!-- Produk 1 -->
   <div class="section">
     <img src="https://files.catbox.moe/pzumnd.jpg" alt="SC CORVUS">
     <div class="title">SC CORVUS</div>
@@ -208,6 +206,7 @@
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
   </div>
 
+  <!-- Produk 2 -->
   <div class="section">
     <img src="https://files.catbox.moe/fmtv4c.jpg" alt="SC SYREN">
     <div class="title">SC SYREN</div>
@@ -216,7 +215,7 @@
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
   </div>
 
-  <!-- Script: Loading & Popup -->
+  <!-- Script JS -->
   <script>
     window.addEventListener('load', () => {
       document.getElementById('loading').style.display = 'none';
@@ -224,27 +223,10 @@
 
     function closePopup() {
       document.getElementById('popup').style.display = 'none';
-      document.getElementById('bgmusic').play().catch(() => {});
+      const music = document.getElementById('bgmusic');
+      if (music) music.play().catch(()=>{});
     }
   </script>
 
 </body>
 </html>
-    }
-    .header {
-      text-align: center;
-      font-size: 1.6rem;
-      color: #ff0077;
-      margin-top: 20px;
-    }
-    .info {
-      font-size: 0.95rem;
-      color: #bbb;
-      margin-top: 10px;
-    }
-    .info b {
-      color: white;
-    }
-  </style>
-</head>
-<body>
