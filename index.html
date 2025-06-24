@@ -1,11 +1,13 @@
-
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Corvus Store - Pembayaran</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: url('background.jpg') no-repeat center center fixed;
@@ -13,35 +15,8 @@
       color: white;
       margin: 0;
       padding: 0;
+      position: relative;
     }
-
-    /* Animasi dan gaya sambutan */
-    .welcome {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      padding: 20px;
-      margin-top: 40px;
-      color: #fff;
-      text-shadow: 2px 2px 6px #000;
-      background: linear-gradient(90deg, #ff0077, #00ffc3);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInDown 1s ease-out;
-    }
-
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .judul {
       position: absolute;
       top: 20px;
@@ -50,10 +25,11 @@
       font-weight: bold;
       color: #00ffc3;
       text-shadow: 1px 1px 4px #000;
+      z-index: 10;
     }
     .section {
       max-width: 500px;
-      margin: 30px auto;
+      margin: 100px auto 30px auto;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 12px;
       padding: 20px;
@@ -64,6 +40,11 @@
       max-width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .section img:hover {
+      transform: scale(1.05);
     }
     .title {
       color: #ff0077;
@@ -108,18 +89,53 @@
     .info b {
       color: white;
     }
+    .countdown {
+      font-size: 1rem;
+      color: #fff;
+      margin-top: 10px;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .modal-content {
+      margin: 10% auto;
+      display: block;
+      max-width: 90%;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    @media (max-width: 500px) {
+      .section {
+        margin: 20px 10px;
+        padding: 15px;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <div class="judul">Pinzy Offc</div>
-
-  <!-- Kata Sambutan -->
-  <div class="welcome">Selamat Datang di Halaman Pembayaran Resmi Pinzy Offc!</div>
-
-  <div class="section">
+  <div class="judul">Pinzy Offc</div>  <div class="section">
     <div class="header">Scan untuk Bayar</div>
-    <img src="qris.jpg" alt="QRIS Code">
+    <img id="qrisImage" src="qris.jpg" alt="QRIS Code">
+    <div class="countdown" id="countdown">Sisa waktu pembayaran: 15:00</div>
     <div class="info">
       <p>Nama Toko: <b>TOKOAERO OK2471435</b></p>
       <p>Metode: QRIS</p>
@@ -127,32 +143,62 @@
       <p>Dicetak: 2025-05-30</p>
     </div>
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
-  </div>
-
-  <div class="section">
+  </div>  <div class="section">
     <div class="header">Atau Bayar via DANA</div>
     <div class="info">
       <p><b>Nomor DANA: 0895373244456</b></p>
       <p>Nama Penerima: <b>CoupDePynzz</b></p>
     </div>
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%206287889308331.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
-  </div>
-
-  <div class="section">
+  </div>  <div class="section">
     <img src="https://files.catbox.moe/pzumnd.jpg" alt="SC CORVUS">
     <div class="title">SC CORVUS</div>
     <div class="price">Harga: 10K</div>
     <div class="desc">Ini adalah script bug hitam, jangan digunakan ke orang tidak bersalah!<br>Enc: 5K | No enc: 10K | Ress 15K</div>
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
-  </div>
-
-  <div class="section">
+  </div>  <div class="section">
     <img src="https://files.catbox.moe/fmtv4c.jpg" alt="SC SYREN">
     <div class="title">SC SYREN</div>
     <div class="price">Harga: 10K</div>
     <div class="desc">Script bug ganas, efek fatal ke target. Gunakan dengan bijak.</div>
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
-  </div>
+  </div>  <div id="modal" class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>  <script>
+    let time = 900; // 15 menit
+    const countdown = document.getElementById('countdown');
+    setInterval(() => {
+      let m = Math.floor(time / 60);
+      let s = time % 60;
+      countdown.textContent = `Sisa waktu pembayaran: ${m}:${s < 10 ? '0' : ''}${s}`;
+      if (time-- <= 0) countdown.textContent = 'QR telah kadaluarsa!';
+    }, 1000);
 
-</body>
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert("Terima kasih! Admin akan segera mengecek pembayaran Anda.");
+      });
+    });
+
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const qrisImg = document.getElementById("qrisImage");
+    const closeModal = document.getElementById("closeModal");
+
+    qrisImg.onclick = () => {
+      modal.style.display = "block";
+      modalImg.src = qrisImg.src;
+    };
+
+    closeModal.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script></body>
 </html>
