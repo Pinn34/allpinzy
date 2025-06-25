@@ -8,15 +8,15 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #121212;
-      color: #fff;
+      background: #f5f5f5;
+      color: #111;
       margin: 0;
       padding: 0;
       transition: background 0.3s, color 0.3s;
     }
-    .light-mode {
-      background: #f5f5f5;
-      color: #111;
+    body.dark-mode {
+      background: #121212;
+      color: #fff;
     }
     .container {
       padding: 20px;
@@ -28,15 +28,16 @@
       color: #ff0077;
     }
     .section {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 12px;
       padding: 15px;
       margin: 20px 0;
-      box-shadow: 0 0 10px #ff007766;
+      box-shadow: 0 0 10px #ff007733;
       transition: transform 0.3s;
     }
-    .section:hover {
-      transform: scale(1.02);
+    body.dark-mode .section {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 10px #ff007766;
     }
     a.btn {
       display: inline-block;
@@ -87,12 +88,15 @@
       color: #ffcc00;
     }
     .testimonial {
-      background: #1e1e1e;
+      background: #e3e3e3;
       border-left: 5px solid #00ffc3;
       padding: 10px 15px;
       margin-top: 10px;
       border-radius: 6px;
       font-size: 0.95rem;
+    }
+    body.dark-mode .testimonial {
+      background: #1e1e1e;
     }
     .notif-live {
       position: fixed;
@@ -113,7 +117,13 @@
   <button class="toggle-mode" onclick="toggleMode()">🌓 Mode</button>
 
   <div class="container">
-    <!-- Konten utamamu di sini (Scan QRIS, DANA, Produk, Testimoni, dll) -->
+    <h1>Corvus Store</h1>
+    <div class="section">
+      <p>Pembayaran dapat dilakukan melalui QRIS / DANA.</p>
+    </div>
+    <div class="testimonial">
+      ⭐ “Sudah beli SC CORVUS, work banget buat bug grup WA. Mantap min!” – Rizky, Makassar
+    </div>
   </div>
 
   <div id="notifLive" class="notif-live"></div>
@@ -124,18 +134,18 @@
 
   <script>
     function toggleMode() {
-      document.body.classList.toggle('light-mode');
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem("theme", isDark ? "dark" : "light");
     }
 
-    let waktu = 900, bar = document.getElementById("bar"), timer = document.getElementById("timer");
-    const hitung = setInterval(() => {
-      if (waktu <= 0) return clearInterval(hitung), timer.innerText = "Waktu habis!";
-      waktu--;
-      let menit = Math.floor(waktu / 60), detik = waktu % 60;
-      timer.innerText = `${menit}:${detik.toString().padStart(2, '0')}`;
-      bar.style.width = (waktu / 900 * 100) + "%";
-      bar.style.background = waktu < 300 ? "orange" : "lime";
-    }, 1000);
+    // Set mode dari localStorage
+    window.onload = () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    };
 
     const liveNotif = ["SC CORVUS dari Bandung", "SC SYREN dari Surabaya", "Bug Tool dari Medan"];
     let i = 0;
