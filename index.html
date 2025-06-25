@@ -8,15 +8,15 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f5f5f5;
-      color: #111;
+      background: #121212;
+      color: #fff;
       margin: 0;
       padding: 0;
       transition: background 0.3s, color 0.3s;
     }
-    body.dark-mode {
-      background: #121212;
-      color: #fff;
+    .light-mode {
+      background: #f5f5f5;
+      color: #111;
     }
     .container {
       padding: 20px;
@@ -28,16 +28,15 @@
       color: #ff0077;
     }
     .section {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       padding: 15px;
       margin: 20px 0;
-      box-shadow: 0 0 10px #ff007733;
+      box-shadow: 0 0 10px #ff007766;
       transition: transform 0.3s;
     }
-    body.dark-mode .section {
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 10px #ff007766;
+    .section:hover {
+      transform: scale(1.02);
     }
     a.btn {
       display: inline-block;
@@ -88,15 +87,12 @@
       color: #ffcc00;
     }
     .testimonial {
-      background: #e3e3e3;
+      background: #1e1e1e;
       border-left: 5px solid #00ffc3;
       padding: 10px 15px;
       margin-top: 10px;
       border-radius: 6px;
       font-size: 0.95rem;
-    }
-    body.dark-mode .testimonial {
-      background: #1e1e1e;
     }
     .notif-live {
       position: fixed;
@@ -115,15 +111,56 @@
 <body>
 
   <button class="toggle-mode" onclick="toggleMode()">🌓 Mode</button>
+  <select onchange="ubahTema(this.value)" style="position:fixed;top:10px;left:15px;padding:8px;border-radius:6px;">
+    <option value="">🎨 Tema</option>
+    <option value="light-mode">Terang</option>
+    <option value="">Gelap</option>
+  </select>
 
   <div class="container">
-    <h1>Corvus Store</h1>
+    <h1>Pinzy Offc</h1>
+
     <div class="section">
-      <p>Pembayaran dapat dilakukan melalui QRIS / DANA.</p>
+      <h2>Scan untuk Bayar</h2>
+      <img src="qris.jpg" alt="QRIS Code" style="width:100%;border-radius:8px;">
+      <div style="width: 100%; background: #ddd; height: 10px; border-radius: 6px; overflow: hidden;">
+        <div id="bar" style="width: 100%; height: 10px; background: lime;"></div>
+      </div>
+      <p class="countdown">Sisa waktu pembayaran: <span id="timer">15:00</span></p>
+      <p>Nama Toko: <b>TOKOAERO OK2471435</b></p>
+      <p>Metode: QRIS</p>
+      <p>ID: ID2025408275456</p>
+      <p>Dicetak: 2025-05-30</p>
+      <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
     </div>
-    <div class="testimonial">
-      ⭐ “Sudah beli SC CORVUS, work banget buat bug grup WA. Mantap min!” – Rizky, Makassar
+
+    <div class="section">
+      <h2>Atau Bayar via DANA</h2>
+      <p><b>Nomor DANA: 0895373244456</b></p>
+      <p>Nama Penerima: <b>CoupDePynzz</b></p>
+      <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%206287889308331.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
     </div>
+
+    <div class="section">
+      <h2>SC CORVUS</h2>
+      <p>Harga: <b>10K</b></p>
+      <p>Ini adalah script bug hitam, jangan digunakan ke orang tidak bersalah!<br>Enc: 5K | No enc: 10K | Ress 15K</p>
+      <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
+    </div>
+
+    <div class="section">
+      <h2>SC SYREN</h2>
+      <p>Harga: <b>10K</b></p>
+      <p>Script bug ganas, efek fatal ke target. Gunakan dengan bijak.</p>
+      <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
+    </div>
+
+    <div class="section">
+      <h2>Testimoni</h2>
+      <div class="testimonial">✅ "Admin fast respon, script work 100%, bakal order lagi!" - <i>@user1</i></div>
+      <div class="testimonial">✅ "QRIS langsung dicek otomatis, mantap. SC Syren gila efeknya!" - <i>@bugking</i></div>
+    </div>
+
   </div>
 
   <div id="notifLive" class="notif-live"></div>
@@ -134,28 +171,37 @@
 
   <script>
     function toggleMode() {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      localStorage.setItem("theme", isDark ? "dark" : "light");
+      document.body.classList.toggle('light-mode');
+    }
+    function ubahTema(t) {
+      document.body.className = t;
     }
 
-    // Set mode dari localStorage
-    window.onload = () => {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "dark") {
-        document.body.classList.add("dark-mode");
-      }
-    };
+    // Countdown Timer + Progress Bar
+    let waktu = 900, bar = document.getElementById("bar"), timer = document.getElementById("timer");
+    const hitung = setInterval(() => {
+      if (waktu <= 0) return clearInterval(hitung), timer.innerText = "Waktu habis!";
+      waktu--;
+      let menit = Math.floor(waktu / 60), detik = waktu % 60;
+      timer.innerText = `${menit}:${detik.toString().padStart(2, '0')}`;
+      bar.style.width = (waktu / 900 * 100) + "%";
+      bar.style.background = waktu < 300 ? "orange" : "lime";
+    }, 1000);
 
+    // Notifikasi Live
     const liveNotif = ["SC CORVUS dari Bandung", "SC SYREN dari Surabaya", "Bug Tool dari Medan"];
     let i = 0;
     setInterval(() => {
-      const box = document.getElementById("notifLive");
-      box.innerText = `✅ ${liveNotif[i]} berhasil dibeli!`;
-      box.style.display = "block";
-      setTimeout(() => box.style.display = "none", 3000);
+      document.getElementById("notifLive").innerText = `✅ ${liveNotif[i]} berhasil dibeli!`;
+      document.getElementById("notifLive").style.display = "block";
+      setTimeout(() => document.getElementById("notifLive").style.display = "none", 4000);
       i = (i + 1) % liveNotif.length;
-    }, 8000);
+    }, 15000);
+
+    // Popup promo otomatis setelah 10 detik
+    setTimeout(() => {
+      alert("🎁 Promo Hari Ini! Gunakan kode PINZYHEBAT untuk diskon 20%!");
+    }, 10000);
   </script>
 
 </body>
