@@ -15,7 +15,6 @@
       margin: 0;
       padding: 0;
     }
-
     .judul {
       position: absolute;
       top: 20px;
@@ -25,7 +24,6 @@
       color: #00ffc3;
       text-shadow: 1px 1px 6px #000;
     }
-
     .section {
       max-width: 500px;
       margin: 100px auto 30px auto;
@@ -35,31 +33,26 @@
       box-shadow: 0 0 10px #fff;
       text-align: center;
     }
-
     .section img {
       max-width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
     }
-
     .title {
       color: #ff0077;
       font-size: 1.4rem;
       font-weight: bold;
       margin-bottom: 10px;
     }
-
     .price {
       color: #00ffc3;
       font-size: 1.1rem;
       margin-bottom: 10px;
     }
-
     .desc {
       font-size: 0.95rem;
       color: #ccc;
     }
-
     .btn {
       display: inline-block;
       margin-top: 15px;
@@ -72,31 +65,25 @@
       box-shadow: 0 0 10px #25D366;
       transition: all 0.3s ease;
     }
-
     .btn:hover {
       background-color: #128C7E;
       box-shadow: 0 0 20px #00ffc3;
       transform: scale(1.05);
     }
-
     .header {
       text-align: center;
       font-size: 1.6rem;
       color: #ff0077;
       margin-top: 20px;
     }
-
     .info {
       font-size: 0.95rem;
       color: #bbb;
       margin-top: 10px;
     }
-
     .info b {
       color: white;
     }
-
-    /* Popup welcome */
     .popup {
       position: fixed;
       top: 0; left: 0;
@@ -107,7 +94,6 @@
       align-items: center;
       z-index: 9999;
     }
-
     .popup-content {
       background: #111;
       color: white;
@@ -117,17 +103,14 @@
       box-shadow: 0 0 20px #00ffc3;
       animation: popupFade 1s ease;
     }
-
     @keyframes popupFade {
       from { opacity: 0; transform: scale(0.8); }
       to { opacity: 1; transform: scale(1); }
     }
-
     .popup-content h2 {
       margin-bottom: 15px;
       color: #00ffc3;
     }
-
     .popup-content button {
       padding: 10px 20px;
       border: none;
@@ -137,11 +120,9 @@
       cursor: pointer;
       font-weight: bold;
     }
-
     .popup-content button:hover {
       background-color: #ff3399;
     }
-
     #scrollTopBtn {
       display: none;
       position: fixed;
@@ -157,22 +138,15 @@
       cursor: pointer;
       box-shadow: 0 0 15px #ff0077;
     }
-
     #scrollTopBtn:hover {
       background-color: #ff3399;
     }
   </style>
 </head>
 <body>
-
-  <!-- Music Audio -->
   <audio id="bgMusic" src="all.mp3" loop></audio>
   <button onclick="playMusic()" style="position:fixed;bottom:20px;left:20px;background:#25D366;color:white;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;z-index:999;">🔊 Putar Musik</button>
-
-  <!-- Scroll Top Button -->
   <button onclick="scrollToTop()" id="scrollTopBtn">⬆️</button>
-
-  <!-- Popup -->
   <div class="popup" id="popupWelcome">
     <div class="popup-content">
       <h2>Selamat Datang di Pinzy Market!</h2>
@@ -180,9 +154,7 @@
       <button onclick="closePopup()">Lanjutkan</button>
     </div>
   </div>
-
   <div class="judul">𝐏𝐢𝐧𝐳𝐲 𝐎𝐟𝐟𝐜</div>
-
   <div class="section">
     <div class="header">Scan untuk Bayar</div>
     <img src="qris.jpg" alt="QRIS Code">
@@ -194,7 +166,6 @@
     </div>
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20bayar%20melalui%20QRIS.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
-
   <div class="section">
     <div class="header">Atau Bayar via DANA</div>
     <div class="info">
@@ -203,7 +174,6 @@
     </div>
     <a class="btn" href="https://wa.me/6287889308331?text=Halo%20admin,%20saya%20sudah%20transfer%20ke%20DANA%200895373244456.%20Mohon%20dicek.">✅ Saya Sudah Bayar</a>
   </div>
-
   <div class="section">
     <img src="https://files.catbox.moe/pzumnd.jpg" alt="SC CORVUS">
     <div class="title">SC CORVUS</div>
@@ -211,7 +181,6 @@
     <div class="desc">Ini adalah script bug yang digunakan 1x langsung hitam, jangan digunakan ke orang tidak bersalah!<br>Enc: 5K | No enc: 10K | Ress 15K</div>
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20CORVUS">Pesan via WhatsApp</a>
   </div>
-
   <div class="section">
     <img src="https://files.catbox.moe/fmtv4c.jpg" alt="SC SYREN">
     <div class="title">SC SYREN</div>
@@ -219,13 +188,11 @@
     <div class="desc">Script bug ganas, efek fatal ke target. Gunakan dengan bijak.</div>
     <a class="btn" href="https://wa.me/6287889308331?text=Saya%20mau%20beli%20SC%20SYREN">Pesan via WhatsApp</a>
   </div>
-
   <script>
     function closePopup() {
       document.getElementById("popupWelcome").style.display = "none";
       playMusic();
     }
-
     function playMusic() {
       const music = document.getElementById("bgMusic");
       music.volume = 0.5;
@@ -233,22 +200,18 @@
         alert("Autoplay diblokir. Klik tombol untuk memutar musik.");
       });
     }
-
     setTimeout(() => {
       if (!document.querySelector(".btn:focus")) {
         alert("⚠️ Jangan lupa untuk melakukan pembayaran sebelum meninggalkan halaman ini.");
       }
     }, 30000);
-
     window.onscroll = function() {
       document.getElementById("scrollTopBtn").style.display = 
         document.body.scrollTop > 200 || document.documentElement.scrollTop > 200 ? "block" : "none";
     };
-
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
-
 </body>
 </html>
